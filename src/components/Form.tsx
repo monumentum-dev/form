@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, type JSX } from 'react';
 
-function App() {
-  const [message, setMessage] = useState('');
+function App(): JSX.Element {
+  const [message, setMessage] = useState<string>('');
 
-//   useEffect(() => {
-//     fetch('/.netlify/functions/hello')
-//       .then((response) => response.json())
-//       .then((data) => setMessage(data.message))
-//       .catch((error) => console.error(error));
-//   }, []);
-   console.log("Message", message)
+  useEffect(() => {
+    fetch('/.netlify/functions/hello')
+      .then((response) => response.text())
+      .then((data) => setMessage(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
   return (
     <div>
       <h1>React + Netlify Functions</h1>
-      {/* <p>{message}</p> */}
+      <p>{message}</p>
     </div>
   );
 }
