@@ -1,6 +1,6 @@
 import React, { useEffect, useState, type JSX } from 'react';
 
-function App(): JSX.Element {
+function App(){
   const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
