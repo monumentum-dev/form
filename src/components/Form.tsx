@@ -9,7 +9,7 @@ function App() {
       .then((data) => setMessage(data.message))
       .catch((error) => console.error(error));
   }, []);
-
+   console.log("Message", message)
   return (
     <div>
       <h1>React + Netlify Functions</h1>
