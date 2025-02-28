@@ -18,6 +18,9 @@ const ClientForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
+  // const host = 'http://localhost:3000';
+  const host = 'https://law-f4xw.onrender.com';
+
   // 📌 Изменение полей ввода
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -36,9 +39,9 @@ const ClientForm: React.FC = () => {
   const sendPhone = async () => {
     setLoading(true);
     setMessage("");
-
+   
     try {
-      const response = await fetch("https://law-f4xw.onrender.com/send-otp", {
+      const response = await fetch(`${host}/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: formData.phone }),
@@ -64,7 +67,7 @@ const ClientForm: React.FC = () => {
     setMessage("");
 
     try {
-      const response = await fetch("https://law-f4xw.onrender.com/validation", {
+      const response = await fetch(`${host}/validation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: formData.phone, otp }),
@@ -95,8 +98,9 @@ const ClientForm: React.FC = () => {
     data.append("phone", formData.phone);
     formData.files.forEach((file) => data.append("files", file));
 
+
     try {
-      const response = await fetch("https://law-f4xw.onrender.com/clients", {
+      const response = await fetch(`${host}/clients`, {
         method: "POST",
         body: data,
       });
