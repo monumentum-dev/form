@@ -120,9 +120,9 @@ const ClientForm: React.FC = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h2 className="mb-2">Dołączenie plików</h2>
-      <p className="mb-3">Prosimy przygotować telefon komórkowy do przyjęcia kodu weryfikacyjnego przez SMS</p>
+    <div className="container mt-4 p-4 border">
+      <h2 className="mb-2 text-center">Dołączenie plików</h2>
+      <p className="mb-3 text-center">Prosimy przygotować telefon komórkowy do przyjęcia kodu weryfikacyjnego przez SMS</p>
 
       {message && <div className="alert alert-info">{message}</div>}
 
