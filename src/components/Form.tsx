@@ -2,32 +2,31 @@ import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 
 interface FormDataState {
-  name: string; 
+  name: string;
   phone: string;
   files: File[];
 }
 
 const ClientForm: React.FC = () => {
-  const [step, setStep] = useState<number>(1); // Управление шагами
+  const [step, setStep] = useState<number>(1); // Zarządzanie krokami
   const [formData, setFormData] = useState<FormDataState>({
     name: "", 
     phone: "",
     files: [],
   });
-  const [otp, setOtp] = useState<string>(""); // OTP-код
+  const [otp, setOtp] = useState<string>(""); // Kod OTP
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  // const host = 'http://localhost:3000';
   const host = 'https://law-f4xw.onrender.com';
 
-  // 📌 Изменение полей ввода
+  // 📌 Zmiana pól wejściowych
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 📌 Обработчик загрузки файлов
+  // 📌 Obsługa przesyłania plików
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -35,7 +34,7 @@ const ClientForm: React.FC = () => {
     }
   };
 
-  // 📌 Отправка номера телефона (ШАГ 1)
+  // 📌 Wysyłanie numeru telefonu (KROK 1)
   const sendPhone = async () => {
     setLoading(true);
     setMessage("");
@@ -49,19 +48,19 @@ const ClientForm: React.FC = () => {
 
       const result = await response.json();
       if (response.ok) {
-        setMessage("✅ OTP отправлен!");
-        setStep(2); // Переход на шаг 2
+        setMessage("✅ OTP wysłany!");
+        setStep(2); // Przejście do kroku 2
       } else {
-        setMessage(`❌ Ошибка: ${result.error}`);
+        setMessage(`❌ Błąd: ${result.error}`);
       }
     } catch (error) {
-      setMessage("❌ Ошибка сервера. Попробуйте позже.");
+      setMessage("❌ Błąd serwera. Spróbuj ponownie później.");
     }
 
     setLoading(false);
   };
 
-  // 📌 Отправка OTP на валидацию (ШАГ 2)
+  // 📌 Weryfikacja OTP (KROK 2)
   const validateOtp = async () => {
     setLoading(true);
     setMessage("");
@@ -75,19 +74,19 @@ const ClientForm: React.FC = () => {
 
       const result = await response.json();
       if (response.ok) {
-        setMessage("✅ OTP подтвержден!");
-        setStep(3); // Переход на шаг 3
+        setMessage("✅ OTP potwierdzony!");
+        setStep(3); // Przejście do kroku 3
       } else {
-        setMessage(`❌ Ошибка: ${result.error}`);
+        setMessage(`❌ Błąd: ${result.error}`);
       }
     } catch (error) {
-      setMessage("❌ Ошибка сервера. Попробуйте позже.");
+      setMessage("❌ Błąd serwera. Spróbuj ponownie później.");
     }
 
     setLoading(false);
   };
 
-  // 📌 Финальная отправка данных (ШАГ 3)
+  // 📌 Ostateczne przesłanie danych (KROK 3)
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -98,7 +97,6 @@ const ClientForm: React.FC = () => {
     data.append("phone", formData.phone);
     formData.files.forEach((file) => data.append("files", file));
 
-
     try {
       const response = await fetch(`${host}/clients`, {
         method: "POST",
@@ -107,15 +105,15 @@ const ClientForm: React.FC = () => {
 
       const result = await response.json();
       if (response.ok) {
-        setMessage("✅ Клиент успешно добавлен!");
-        setStep(1); // Сброс на первый шаг
+        setMessage("✅ Klient został pomyślnie dodany!");
+        setStep(1); // Reset do pierwszego kroku
         setFormData({ name: "",  phone: "", files: [] });
         setOtp("");
       } else {
-        setMessage(`❌ Ошибка: ${result.error}`);
+        setMessage(`❌ Błąd: ${result.error}`);
       }
     } catch (error) {
-      setMessage("❌ Ошибка сервера. Попробуйте позже.");
+      setMessage("❌ Błąd serwera. Spróbuj ponownie później.");
     }
 
     setLoading(false);
@@ -123,13 +121,14 @@ const ClientForm: React.FC = () => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-3">Добавить клиента</h2>
+      <h2 className="mb-2">Dołączenie plików</h2>
+      <p className="mb-3">Prosimy przygotować telefon komórkowy do przyjęcia kodu weryfikacyjnego przez SMS</p>
 
       {message && <div className="alert alert-info">{message}</div>}
 
       {step === 1 && (
         <div>
-          <label className="form-label">Телефон</label>
+          <label className="form-label">Numer telefonu komórkowego</label>
           <input
             type="tel"
             name="phone"
@@ -139,14 +138,14 @@ const ClientForm: React.FC = () => {
             required
           />
           <button onClick={sendPhone} className="btn btn-primary mt-2" disabled={loading}>
-            {loading ? "Отправка..." : "Отправить OTP"}
+            {loading ? "Wysyłanie..." : "Wyślij numer"}
           </button>
         </div>
       )}
 
       {step === 2 && (
         <div>
-          <label className="form-label">Введите OTP</label>
+          <label className="form-label">Kod weryfikacyjny z SMS</label>
           <div className="d-flex gap-2">
             {[0, 1, 2, 3].map((index) => (
               <input
@@ -164,7 +163,7 @@ const ClientForm: React.FC = () => {
             ))}
           </div>
           <button onClick={validateOtp} className="btn btn-primary mt-2" disabled={loading}>
-            {loading ? "Проверка..." : "Проверить OTP"}
+            {loading ? "Sprawdzanie..." : "Sprawdź kod"}
           </button>
         </div>
       )}
@@ -172,7 +171,7 @@ const ClientForm: React.FC = () => {
       {step === 3 && (
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label className="form-label">Имя и фамилия</label>
+            <label className="form-label">Imię i nazwisko</label>
             <input
               type="text"
               name="name"
@@ -184,12 +183,12 @@ const ClientForm: React.FC = () => {
           </div>
 
           <div className="mb-3">
-            <label className="form-label">Файлы</label>
+            <label className="form-label">Pliki</label>
             <input type="file" className="form-control" multiple onChange={handleFileChange} />
           </div>
 
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? "Отправка..." : "Добавить клиента"}
+            {loading ? "Wysyłanie..." : "Dodaj klienta"}
           </button>
         </form>
       )}
