@@ -181,8 +181,6 @@ const ClientForm: React.FC = () => {
 
       <div className="row fs-4">
         <div className="mx-auto col-lg-6">
-
-
           {message && <div className="alert alert-info">{message}</div>}
 
           {step === 1 && (
@@ -258,7 +256,7 @@ const ClientForm: React.FC = () => {
               </div>
 
               <button type="submit" className="btn btn-primary" disabled={loading}>
-                {loading ? "Wysyłanie..." : "Dodaj klienta"}
+                {loading ? "Wysyłanie..." : "Dodaj doku"}
               </button>
             </form>
           )}
