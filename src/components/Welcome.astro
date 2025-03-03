@@ -1,21 +1,13 @@
 ---
 import Form from "./Form";
-
-
+import Instruction from "./Instruction.astro";
+import Title from "./Title.astro";
 ---
-<div class="container mt-5">
-    <h1 class="text-center text-primary">Prześlij swoje dokumenty – Pomoc dla Frankowiczów</h1>
-    
-    <p class="text-center text-muted">Aby uzyskać wsparcie w sprawach kredytów frankowych, prześlij niezbędne dokumenty, postępując według instrukcji poniżej.</p>
-    
-    <ul class="list-group mt-4">
-        <li class="list-group-item">1. Zeskanuj lub sfotografuj wymagane dokumenty (umowa kredytowa, aneksy, korespondencja z bankiem).</li>
-        <li class="list-group-item">2. Upewnij się, że wszystkie pliki są czytelne i zapisane w formacie PDF, JPG lub PNG.</li>
-        <li class="list-group-item">3. Wypełnij formularz zgłoszeniowy na naszej stronie, podając swoje dane kontaktowe.</li>
-        <li class="list-group-item">4. Załącz przygotowane pliki i kliknij „Wyślij”.</li>
-        <li class="list-group-item">5. Oczekuj na kontakt naszego specjalisty, który przeanalizuje Twoją sprawę.</li>
-    </ul>
-</div>
-<div class="mt-5">
-	<Form client:load/>
+
+<div>
+    <div class="container">
+        <Title />
+        <Instruction />       
+    <Form client:load />
+</div>   
 </div>
