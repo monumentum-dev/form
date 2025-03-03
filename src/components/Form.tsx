@@ -176,7 +176,7 @@ const ClientForm: React.FC = () => {
   };
 
   return (
-    <div className="my-5">
+    <div className="my-5 py-4 border">
       {step === 1 && <p className="mb-4 text-bold text-center"><strong className="fs-4 text-warning">Prosimy przygotować telefon komórkowy 📱 do przyjęcia kodu weryfikacyjnego przez SMS </strong></p>}
 
       <div className="row fs-4">
@@ -187,11 +187,11 @@ const ClientForm: React.FC = () => {
 
           {step === 1 && (
             <form className="form-inline">
-              <label className="form-label">Numer telefonu komórkowego</label>
+              <label className="form-label mb-2">Numer telefonu komórkowego</label>
               <input
                 type="tel"
                 name="phone"
-                className="form-control"
+                className="form-control  mb-2"
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="+48 123456789"
