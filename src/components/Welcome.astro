@@ -1,6 +1,8 @@
 ---
+import Choice from "./Choice";
 import Form from "./Form";
 import Instruction from "./Instruction.astro";
+import LinkForm from "./LinkForm";
 import Title from "./Title.astro";
 ---
 
@@ -8,7 +10,9 @@ import Title from "./Title.astro";
     <div class="container">
         <Title />
         <p class="mb-4 text-bold text-center"><strong class="fs-4 text-warning">Prosimy przygotować telefon komórkowy 📱 do przyjęcia kodu weryfikacyjnego przez SMS </strong></p>
-        <Form client:load />
+        <Choice client:load />
+        <!-- <Form client:load />
+        <LinkForm client:load /> -->
         <Instruction />
     </div>
 </div>
