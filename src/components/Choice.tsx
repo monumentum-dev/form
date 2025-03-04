@@ -8,12 +8,12 @@ const Choice: React.FC = () => {
   return (
     <div className="container text-center mt-5">
       {!selectedOption ? (
-        <div>
+        <div className="">
           <p className="text-uppercase text-center text-light mb-4 fs-5">Wybierz sposób przesyłania danych</p>
           <p className="mb-3">Możesz przesłać pliki bezpośrednio lub podać link do Google Drive/Dropbox.</p>
           <div className="d-flex justify-content-center gap-3">
             <button className="btn btn-primary" onClick={() => setSelectedOption("files")}>📂 Prześlij pliki</button>
-            <button className="btn btn-dark" onClick={() => setSelectedOption("link")}>🔗 Podaj link</button>
+            <button className="btn btn-secondary" onClick={() => setSelectedOption("link")}>🔗 Podaj link</button>
           </div>
         </div>
       ) : (

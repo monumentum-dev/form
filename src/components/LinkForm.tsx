@@ -127,6 +127,7 @@ const host = "https://law-f4xw.onrender.com";
           {message && <div className="alert alert-info">{message}</div>}
           {step === 1 && (
             <form>
+            <label className="form-label mb-2">Numer telefonu komórkowego</label>
               <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+48 123456789" required className="form-control mb-2" />
               {phoneError && <div className="text-danger">{phoneError}</div>}
               <button onClick={sendPhone} className="btn btn-primary mt-2" disabled={loading}>{loading ? "Wysyłanie..." : "Wyślij numer"}</button>
