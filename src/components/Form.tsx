@@ -176,11 +176,9 @@ const ClientForm: React.FC = () => {
   };
 
   return (
-    <div className="my-5 py-4 px-2 border">
-      {step === 1 && <p className="mb-4 text-bold text-center"><strong className="fs-4 text-warning">Prosimy przygotować telefon komórkowy 📱 do przyjęcia kodu weryfikacyjnego przez SMS </strong></p>}
-
-      <div className="row fs-4">
-        <div className="mx-auto col-lg-6">
+    <div className="my-5">   
+      <div className="row fs-4 ">
+        <div className="mx-auto col-lg-6 py-3 px-4 border">
           {message && <div className="alert alert-info">{message}</div>}
 
           {step === 1 && (
