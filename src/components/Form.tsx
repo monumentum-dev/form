@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
+import { useRef } from "react";
 
 interface FormDataState {
   name: string;
@@ -8,6 +9,7 @@ interface FormDataState {
 }
 
 const ClientForm: React.FC = () => {
+  const fileInputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const [step, setStep] = useState<number>(1); // Zarządzanie krokami
   const [formData, setFormData] = useState<FormDataState>({
     name: "",
@@ -74,6 +76,14 @@ const ClientForm: React.FC = () => {
   const handleFileRemove = (index: number) => {
     setFormData((prev) => {
       const newFiles = prev.files.filter((_, i) => i !== index);
+      console.log("formData.files",formData.files);
+      
+      // Очистка инпута файла
+      // if (fileInputsRef.current[index]) {
+      //   console.log(fileInputsRef.current)
+      //   fileInputsRef.current[index]!.value = "";
+      // }
+  
       return { ...prev, files: newFiles };
     });
   };
@@ -176,7 +186,7 @@ const ClientForm: React.FC = () => {
   };
 
   return (
-    <div className="my-5">   
+    <div className="my-5">
       <div className="row fs-4 ">
         <div className="mx-auto col-lg-6 py-3 px-4 border">
           {message && <div className="alert alert-info">{message}</div>}
@@ -238,23 +248,39 @@ const ClientForm: React.FC = () => {
 
               <div className="mb-3">
                 <label className="form-label">Pliki</label>
-                {Array.from({ length: Math.min(formData.files.length + 1, 10) }).map((_, index) => (
+                {/* {Array.from({ length: Math.min(formData.files.length + 1, 10) }).map((_, index) => (
                   <div key={index} className="d-flex align-items-center gap-2 mb-2">
                     <input
                       type="file"
-                      className="form-control "
+                      className="form-control"                      
                       onChange={(e) => handleFileChange(e, index)}
-                      disabled={formData.files.length >= 10}
+                      disabled={formData.files.length >= 10}                    
                     />
                     {index < formData.files.length && (
                       <button type="button" className="btn btn-danger" onClick={() => handleFileRemove(index)}>Usuń</button>
                     )}
                   </div>
-                ))}
+                ))} */}
+                {Array.from({ length: Math.min(formData.files.length + 1, 10) }).map((_, index) => (
+  <div key={index} className="d-flex align-items-center gap-2 mb-2">
+    <input
+      type="file"
+      className="form-control"
+      onChange={(e) => handleFileChange(e, index)}
+      disabled={formData.files.length >= 10}
+      value={index === formData.files.length ? "" : undefined} // Очищаем только последний
+    />
+    {index < formData.files.length && (
+      <button type="button" className="btn btn-danger" onClick={() => handleFileRemove(index)}>
+        Usuń
+      </button>
+    )}
+  </div>
+))}
               </div>
 
               <button type="submit" className="btn btn-primary" disabled={loading}>
-                {loading ? "Wysyłanie..." : "Dodaj doku"}
+                {loading ? "Wysyłanie..." : "Dodaj dokumenty"}
               </button>
             </form>
           )}
