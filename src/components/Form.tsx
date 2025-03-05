@@ -247,20 +247,7 @@ const ClientForm: React.FC = () => {
               </div>
 
               <div className="mb-3">
-                <label className="form-label">Pliki</label>
-                {/* {Array.from({ length: Math.min(formData.files.length + 1, 10) }).map((_, index) => (
-                  <div key={index} className="d-flex align-items-center gap-2 mb-2">
-                    <input
-                      type="file"
-                      className="form-control"                      
-                      onChange={(e) => handleFileChange(e, index)}
-                      disabled={formData.files.length >= 10}                    
-                    />
-                    {index < formData.files.length && (
-                      <button type="button" className="btn btn-danger" onClick={() => handleFileRemove(index)}>Usuń</button>
-                    )}
-                  </div>
-                ))} */}
+                <label className="form-label">Pliki</label>             
                 {Array.from({ length: Math.min(formData.files.length + 1, 10) }).map((_, index) => (
   <div key={index} className="d-flex align-items-center gap-2 mb-2">
     <input

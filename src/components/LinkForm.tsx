@@ -135,9 +135,12 @@ const host = "https://law-f4xw.onrender.com";
           )}
           {step === 2 && (
             <div>
+              <label className="form-label">Kod weryfikacyjny z SMS</label>
+              <div className="d-flex gap-2"> 
               {[0, 1, 2, 3].map((index) => (
-                <input key={index} id={`otp-${index}`} type="text" maxLength={1} className="form-control otp-input text-center" value={otp[index] || ""} onChange={(e) => handleOtpChange(e, index)} />
+                <input  className="form-control otp-input text-center" key={index} id={`otp-${index}`} type="text" maxLength={1}  value={otp[index] || ""} onChange={(e) => handleOtpChange(e, index)} />
               ))}
+              </div>
               <button onClick={validateOtp} className="btn btn-primary mt-2" disabled={loading}>{loading ? "Sprawdzanie..." : "Sprawdź kod"}</button>
             </div>
           )}
